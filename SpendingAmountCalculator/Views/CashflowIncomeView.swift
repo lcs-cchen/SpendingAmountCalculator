@@ -15,6 +15,62 @@ struct CashflowIncomeView: View {
     @State var monthlyFoodExpenses = ""
     @State var monthlyTransportationExpenses = ""
     
+    var monthlyIncomeAsOptionalDouble: Double? {
+        
+        guard let unwrappedMonthlyIncome = Double(monthlyIncome) else {
+            return nil
+        }
+        
+        // Return the unwrapped value
+        return unwrappedMonthlyIncome
+    }
+    var monthlBillsAsOptionalDouble: Double? {
+        
+        guard let unwrappedMonthlyBills = Double(monthlyBills) else {
+            return nil
+        }
+        
+        // Return the unwrapped value
+        return unwrappedMonthlyBills
+    }
+    var monthlyAsOptionalDouble: Double? {
+        
+        guard let unwrappedMonthlyIncome = Double(monthlyIncome) else {
+            return nil
+        }
+        
+        // Return the unwrapped value
+        return unwrappedMonthlyIncome
+    }
+    var monthlyInvestmentsAsOptionalDouble: Double? {
+        
+        guard let unwrappedMonthlyInvestments = Double(monthlyInvestments) else {
+            return nil
+        }
+        
+        // Return the unwrapped value
+        return unwrappedMonthlyInvestments
+    }
+    var monthlyFoodExpensesAsOptionalDouble: Double? {
+        
+        guard let unwrappedMonthlyFoodExpenses = Double(monthlyFoodExpenses) else {
+            return nil
+        }
+        
+        // Return the unwrapped value
+        return unwrappedMonthlyFoodExpenses
+    }
+    var monthlyTransportationExpensesAsOptionalDouble: Double? {
+        
+        guard let unwrappedMonthlyTransportationExpenses = Double(monthlyTransportationExpenses) else {
+            return nil
+        }
+        
+        // Return the unwrapped value
+        return unwrappedMonthlyTransportationExpenses
+    }
+    
+    
     var body: some View {
         ZStack{
             Color("Light Grey")
@@ -43,9 +99,10 @@ struct CashflowIncomeView: View {
                     Group{
                         HStack {
                             Text("CashFlow/Income")
-                                .font(.largeTitle)
-                                .underline()
+                                .font(Font.custom("HelveticaNeue", size: 50))
                                 .bold()
+                                
+                                
                             Spacer()
                         }
                         InputValueTitleView(titleOfInput: "Monthly Income/CashFlow", inputValue: $monthlyIncome)
@@ -63,7 +120,7 @@ struct CashflowIncomeView: View {
                     }
                     .padding(.horizontal, 60)
                     
-                    Spacer()
+                    Spacer(minLength: 150)
                     Group{
                         VStack{
                             Text("Total Disposable income:")

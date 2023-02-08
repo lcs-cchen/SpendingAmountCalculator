@@ -14,10 +14,12 @@ struct InputValueTitleView: View {
         HStack {
             Text("\(titleOfInput) : ")
                 .multilineTextAlignment(.leading)
+                .font(Font.custom("HelveticaNeue", size: 18))
             
             
             TextField("Input", text: $inputValue)
                 .multilineTextAlignment(.trailing)
+                .font(Font.custom("HelveticaNeue", size: 18))
         }
     }
 }
