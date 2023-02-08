@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct InputValueTitleView: View {
-    let TitleOfInput : String
+    let titleOfInput : String
+    @Binding var inputValue: String
     var body: some View {
         HStack {
-            Text("\(TitleOfInput) : ")
+            Text("\(titleOfInput) : ")
                 .multilineTextAlignment(.leading)
             
             
-            TextField("Input", text: .constant(""))
+            TextField("Input", text: $inputValue)
                 .multilineTextAlignment(.trailing)
         }
     }
@@ -23,6 +24,6 @@ struct InputValueTitleView: View {
 
 struct InputValueTitleView_Previews: PreviewProvider {
     static var previews: some View {
-        InputValueTitleView(TitleOfInput: "Income/CashFlow")
+        InputValueTitleView(titleOfInput: "Income/CashFlow", inputValue: Binding.constant(""))
     }
 }

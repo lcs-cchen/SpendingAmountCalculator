@@ -9,6 +9,12 @@ import SwiftUI
 
 struct CashflowIncomeView: View {
     
+    @State var monthlyIncome = ""
+    @State var monthlyBills = ""
+    @State var monthlyInvestments = ""
+    @State var monthlyFoodExpenses = ""
+    @State var monthlyTransportationExpenses = ""
+    
     var body: some View {
         ZStack{
             Color("Light Grey")
@@ -42,22 +48,40 @@ struct CashflowIncomeView: View {
                                 .bold()
                             Spacer()
                         }
-                        InputValueTitleView(TitleOfInput: "Monthly Income/CashFlow")
-                        
-                        InputValueTitleView(TitleOfInput: "Monthly Bill Expenses")
-                        
-                        InputValueTitleView(TitleOfInput: "Monthly Investments")
-                        
-                        InputValueTitleView(TitleOfInput: "Monthly Food Expenses")
-                        
-                        InputValueTitleView(TitleOfInput: "Monthly Transportation Expenses")
+                        InputValueTitleView(titleOfInput: "Monthly Income/CashFlow", inputValue: $monthlyIncome)
+
+                        InputValueTitleView(titleOfInput: "Monthly Bill Expenses", inputValue: $monthlyBills)
+
+                        InputValueTitleView(titleOfInput: "Monthly Investments", inputValue: $monthlyInvestments)
+
+                        InputValueTitleView(titleOfInput: "Monthly Food Expenses", inputValue: $monthlyFoodExpenses)
+
+                        InputValueTitleView(titleOfInput: "Monthly Transportation Expenses", inputValue: $monthlyTransportationExpenses)
                         
                         
                         
                     }
                     .padding(.horizontal, 60)
                     
-
+                    Spacer()
+                    Group{
+                        VStack{
+                            Text("Total Disposable income:")
+                                .font(.title2)
+                            Text("$4500")
+                                .font(Font.custom("HelveticaNeue", size: 60))
+                                .bold()
+                        }
+                    }
+                    Spacer()
+                    Group{
+                        HStack{
+                            VStack{
+                             
+                            }
+                            
+                        }
+                    }
                     
                 }
                 
