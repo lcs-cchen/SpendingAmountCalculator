@@ -15,6 +15,7 @@ struct CashflowIncomeView: View {
     @State var monthlyFoodExpenses = ""
     @State var monthlyTransportationExpenses = ""
     
+
     var monthlyIncomeAsOptionalDouble: Double? {
         
         guard let unwrappedMonthlyIncome = Double(monthlyIncome) else {
@@ -74,7 +75,7 @@ struct CashflowIncomeView: View {
     var body: some View {
         ZStack{
             Color("Light Grey")
-                .ignoresSafeArea()
+                .ignoresSafeArea(edges: .top)
             Group{
                 VStack {
                     Spacer()
@@ -139,13 +140,7 @@ struct CashflowIncomeView: View {
                         }
                     }
                     Spacer()
-                    Group{
-                        HStack{
-                            VStack{
-                             
-                            }
-                            
-                        }
+                   
                     }
                     
                 }
@@ -154,7 +149,7 @@ struct CashflowIncomeView: View {
             
         }
     }
-}
+
 struct CashflowIncomeView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
@@ -175,8 +170,6 @@ struct CashflowIncomeView_Previews: PreviewProvider {
                     }
                 
             }
-            .toolbar(.visible, for: .tabBar)
-            .toolbarBackground(Color.white, for: .tabBar)
             
         }
         

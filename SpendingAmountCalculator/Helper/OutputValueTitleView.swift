@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct OutputValueTitleView: View {
+    let titleOfOutput : String
+    var outputValue: String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("\(titleOfOutput) : ")
+                .multilineTextAlignment(.leading)
+                .font(Font.custom("HelveticaNeue", size: 18))
+            Spacer()
+            
+           Text("\(outputValue)")
+                .multilineTextAlignment(.trailing)
+                .font(Font.custom("HelveticaNeue", size: 18))
+        }
     }
 }
-
 struct OutputValueTitleView_Previews: PreviewProvider {
     static var previews: some View {
-        OutputValueTitleView()
+        OutputValueTitleView(titleOfOutput: "Income/CashFlow", outputValue: "23")
     }
 }
