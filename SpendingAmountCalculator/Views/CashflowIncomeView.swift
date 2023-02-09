@@ -75,36 +75,44 @@ struct CashflowIncomeView: View {
         ZStack{
             Color("Light Grey")
                 .ignoresSafeArea()
-            
-            VStack {
-                Spacer()
-                Rectangle()
-                    .frame(width: 330, height: 475)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
-                Spacer()
-                Rectangle()
-                    .frame(width: 330, height: 150)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
-                Spacer()
-                Rectangle()
-                    .frame(width: 400, height: 80)
-                    .foregroundColor(.white)
-                    .padding(.bottom, -30)
+            Group{
+                VStack {
+                    Spacer()
+                    Rectangle()
+                        .frame(width: 330, height: 475)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                    Spacer()
+                    Rectangle()
+                        .frame(width: 330, height: 150)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                    Spacer()
+                }
             }
             ZStack{
                 VStack(spacing: 10){
                     Spacer()
                     Group{
-                        HStack {
-                            Text("CashFlow/Income")
-                                .font(Font.custom("HelveticaNeue", size: 50))
-                                .bold()
+                            VStack {
+                                HStack{
+                                    Text("Cashflow")
+                                        .font(Font.custom("HelveticaNeue", size: 50))
+                                        .bold()
+                                        .multilineTextAlignment(.leading)
+                                    Spacer()
+                                }
                                 
-                                
-                            Spacer()
+                                HStack{
+                                    Text("/Income")
+                                        .font(Font.custom("HelveticaNeue", size: 50))
+                                        .bold()
+                                        .multilineTextAlignment(.leading)
+                                    Spacer()
+                                }
+                            
                         }
+                       
                         InputValueTitleView(titleOfInput: "Monthly Income/CashFlow", inputValue: $monthlyIncome)
 
                         InputValueTitleView(titleOfInput: "Monthly Bill Expenses", inputValue: $monthlyBills)
@@ -120,7 +128,7 @@ struct CashflowIncomeView: View {
                     }
                     .padding(.horizontal, 60)
                     
-                    Spacer(minLength: 150)
+                    Spacer(minLength: 100)
                     Group{
                         VStack{
                             Text("Total Disposable income:")
@@ -149,6 +157,28 @@ struct CashflowIncomeView: View {
 }
 struct CashflowIncomeView_Previews: PreviewProvider {
     static var previews: some View {
-        CashflowIncomeView()
+        TabView {
+            Group{
+                CashflowIncomeView()
+                    .tabItem {
+                        Image(systemName: "dollarsign.arrow.circlepath")
+                        Text("Cashflow/Income")
+                        
+                    }
+                
+                
+                
+                CashflowIncomeView()
+                    .tabItem {
+                        Image(systemName: "dollarsign.square")
+                        Text("Budjet")
+                    }
+                
+            }
+            .toolbar(.visible, for: .tabBar)
+            .toolbarBackground(Color.white, for: .tabBar)
+            
+        }
+        
     }
 }

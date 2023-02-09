@@ -11,7 +11,20 @@ import SwiftUI
 struct SpendingAmountCalculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            CashflowIncomeView()
+            TabView {
+                CashflowIncomeView()
+                    .tabItem {
+                        Image(systemName: "car")
+                        Text("Hi")
+                    }
+
+                CashflowIncomeView()
+                    .tabItem {
+                        Image(systemName: "circle")
+                        Text("Bye")
+                    }
+
+            }
         }
     }
 }
