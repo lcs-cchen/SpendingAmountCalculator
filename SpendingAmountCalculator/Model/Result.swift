@@ -18,7 +18,7 @@ struct result: Identifiable {
     
 }
 
-var exampleResultForPreviews = result(Income: "$2000", Bills: "$500", Investments: "200", FoodExpenses: "100", TransportationExpense: "400")
+var exampleResultForPreviews = result(Income: "$2000", Bills: "20%", Investments: "10%", FoodExpenses: "2%", TransportationExpense: "4%")
 
 
 
