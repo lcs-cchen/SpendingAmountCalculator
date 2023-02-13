@@ -14,7 +14,7 @@ struct CashflowIncomeView: View {
     @State var monthlyInvestments = ""
     @State var monthlyFoodExpenses = ""
     @State var monthlyTransportationExpenses = ""
-    
+    @State var computedResult: [Result] = []
 
     var monthlyIncomeAsOptionalDouble: Double? {
         
@@ -25,7 +25,7 @@ struct CashflowIncomeView: View {
         // Return the unwrapped value
         return unwrappedMonthlyIncome
     }
-    var monthlBillsAsOptionalDouble: Double? {
+    var monthlyBillsAsOptionalDouble: Double? {
         
         guard let unwrappedMonthlyBills = Double(monthlyBills) else {
             return nil
@@ -34,15 +34,7 @@ struct CashflowIncomeView: View {
         // Return the unwrapped value
         return unwrappedMonthlyBills
     }
-    var monthlyAsOptionalDouble: Double? {
-        
-        guard let unwrappedMonthlyIncome = Double(monthlyIncome) else {
-            return nil
-        }
-        
-        // Return the unwrapped value
-        return unwrappedMonthlyIncome
-    }
+
     var monthlyInvestmentsAsOptionalDouble: Double? {
         
         guard let unwrappedMonthlyInvestments = Double(monthlyInvestments) else {
@@ -70,8 +62,95 @@ struct CashflowIncomeView: View {
         // Return the unwrapped value
         return unwrappedMonthlyTransportationExpenses
     }
+    var  monthlyIncomeUnwrapped: Double {
+        
+        // Try to unwrap the optional Double
+        // Get the value as an actual Double, not optional (STEP 3)
+        guard let monthlyIncomeAsDouble = monthlyIncomeAsOptionalDouble else  {
+            
+            return 0
+        }
+        
+        // We now know that we have a Double, so find its square root
+        let monthlyIncomeUnwrapped = monthlyIncomeAsDouble
+
+        // Now return the formatted String
+        // (STEP 4)
+        return monthlyIncomeUnwrapped
+        
+    }
+    var monthlyBillsUnwrapped: Double {
+        
+        // Try to unwrap the optional Double
+        // Get the value as an actual Double, not optional (STEP 3)
+        guard let monthlyBillsAsDouble = monthlyBillsAsOptionalDouble else  {
+            
+            return 0
+        }
+        
+        // We now know that we have a Double, so find its square root
+        let monthlyBillsUnwrapped = monthlyBillsAsDouble
+
+        // Now return the formatted String
+        // (STEP 4)
+        return monthlyBillsUnwrapped
+        
+    }
+    var monthlyInvestmentsUnwrapped: Double {
+        
+        // Try to unwrap the optional Double
+        // Get the value as an actual Double, not optional (STEP 3)
+        guard let monthlyInvestmentsAsDouble = monthlyInvestmentsAsOptionalDouble else  {
+            
+            return 0
+        }
+        
+
+        let monthlyInvestmentsUnwrapped = monthlyInvestmentsAsDouble
+
+        // Now return the formatted String
+        // (STEP 4)
+        return monthlyInvestmentsUnwrapped
+        
+    }
+    var monthlyFoodExpensesUnwrapped: Double {
+        
+        // Try to unwrap the optional Double
+        // Get the value as an actual Double, not optional (STEP 3)
+        guard let monthlyFoodExpensesAsDouble = monthlyFoodExpensesAsOptionalDouble else  {
+            
+            return 0
+        }
+        
+        // We now know that we have a Double, so find its square root
+        let monthlyFoodExpensesUnwrapped = monthlyFoodExpensesAsDouble
+
+        // Now return the formatted String
+        // (STEP 4)
+        return monthlyFoodExpensesUnwrapped
+        
+    }
+    var monthlyTransportationExpensesUnwrapped: Double {
+        
+        // Try to unwrap the optional Double
+        // Get the value as an actual Double, not optional (STEP 3)
+        guard let monthlyTransportationExpensesAsDouble = monthlyTransportationExpensesAsOptionalDouble else  {
+            
+            return 0
+        }
+        
+        // We now know that we have a Double, so find its square root
+        let monthlyTransportationExpensesUnwrapped = monthlyTransportationExpensesAsDouble
+
+        // Now return the formatted String
+        // (STEP 4)
+        return monthlyTransportationExpensesUnwrapped
+        
+    }
+    @Binding var billPercentage: String
     
-    
+   
+        
     var body: some View {
         ZStack{
             Color("Light Grey")
@@ -154,7 +233,7 @@ struct CashflowIncomeView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
             Group{
-                CashflowIncomeView()
+                CashflowIncomeView(billPercentage: Binding.constant(" "))
                     .tabItem {
                         Image(systemName: "dollarsign.arrow.circlepath")
                         Text("Cashflow/Income")
@@ -163,7 +242,7 @@ struct CashflowIncomeView_Previews: PreviewProvider {
                 
                 
                 
-                CashflowIncomeView()
+                BudgetView()
                     .tabItem {
                         Image(systemName: "dollarsign.square")
                         Text("Budjet")
