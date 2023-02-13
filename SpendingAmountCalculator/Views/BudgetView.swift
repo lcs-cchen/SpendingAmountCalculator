@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BudgetView: View {
+    @State var computedResult: [result] = []
     var body: some View {
         ZStack{
             Color("Light Grey")

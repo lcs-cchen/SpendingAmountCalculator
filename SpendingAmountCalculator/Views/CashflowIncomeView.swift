@@ -14,7 +14,7 @@ struct CashflowIncomeView: View {
     @State var monthlyInvestments = ""
     @State var monthlyFoodExpenses = ""
     @State var monthlyTransportationExpenses = ""
-    @State var computedResult: [Result] = []
+    @State var computedResult: [result] = []
 
     var monthlyIncomeAsOptionalDouble: Double? {
         
@@ -202,7 +202,20 @@ struct CashflowIncomeView: View {
                         InputValueTitleView(titleOfInput: "Monthly Food Expenses", inputValue: $monthlyFoodExpenses)
 
                         InputValueTitleView(titleOfInput: "Monthly Transportation Expenses", inputValue: $monthlyTransportationExpenses)
-                        
+                        Button(action: {
+                            let income = String(monthlyIncomeUnwrapped)
+                            let bills = String(((monthlyBillsUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
+                            let investments = String(((monthlyInvestmentsUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
+                            let foodExpenses = String(((monthlyFoodExpensesUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
+                            let transportationExpense = String(((monthlyTransportationExpensesUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
+                           
+                            let priorResult = result(Income: income, Bills: bills, Investments: investments, FoodExpenses: foodExpenses, TransportationExpense: transportationExpense)
+                            computedResult.append(priorResult)
+                                               }, label: {
+                                Text("Save")
+                                    .font(.headline.smallCaps())
+                            })
+                                .buttonStyle(.bordered)
                         
                         
                     }

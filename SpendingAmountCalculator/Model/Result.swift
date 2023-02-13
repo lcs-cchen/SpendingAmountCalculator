@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Result: Identifiable {
+struct result: Identifiable {
     
     let id = UUID()
     let Income: String
@@ -18,7 +18,7 @@ struct Result: Identifiable {
     
 }
 
-var exampleResultForPreviews = Result(Income: "$2000", Bills: "$500", Investments: "200", FoodExpenses: "100", TransportationExpense: "400")
+var exampleResultForPreviews = result(Income: "$2000", Bills: "$500", Investments: "200", FoodExpenses: "100", TransportationExpense: "400")
 
 
 
