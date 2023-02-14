@@ -15,10 +15,12 @@ struct result: Identifiable {
     let Investments: String
     let FoodExpenses: String
     let TransportationExpense: String
+    let Budget: String
+    let BudgetPercentage: String
     
 }
 
-var exampleResultForPreviews = result(Income: "$2000", Bills: "20%", Investments: "10%", FoodExpenses: "2%", TransportationExpense: "4%")
+var exampleResultForPreviews = result(Income: "$2000", Bills: "20", Investments: "10", FoodExpenses: "2", TransportationExpense: "4",Budget: "200", BudgetPercentage: "10")
 
 
 

@@ -9,146 +9,78 @@ import SwiftUI
 
 struct CashflowIncomeView: View {
     
+    @State var history: [result] = []
     @State var monthlyIncome = ""
     @State var monthlyBills = ""
     @State var monthlyInvestments = ""
     @State var monthlyFoodExpenses = ""
     @State var monthlyTransportationExpenses = ""
-    @State var computedResult: [result] = []
 
-    var monthlyIncomeAsOptionalDouble: Double? {
-        
-        guard let unwrappedMonthlyIncome = Double(monthlyIncome) else {
-            return nil
-        }
-        
-        // Return the unwrapped value
-        return unwrappedMonthlyIncome
-    }
-    var monthlyBillsAsOptionalDouble: Double? {
-        
-        guard let unwrappedMonthlyBills = Double(monthlyBills) else {
-            return nil
-        }
-        
-        // Return the unwrapped value
-        return unwrappedMonthlyBills
-    }
-
-    var monthlyInvestmentsAsOptionalDouble: Double? {
-        
-        guard let unwrappedMonthlyInvestments = Double(monthlyInvestments) else {
-            return nil
-        }
-        
-        // Return the unwrapped value
-        return unwrappedMonthlyInvestments
-    }
-    var monthlyFoodExpensesAsOptionalDouble: Double? {
-        
-        guard let unwrappedMonthlyFoodExpenses = Double(monthlyFoodExpenses) else {
-            return nil
-        }
-        
-        // Return the unwrapped value
-        return unwrappedMonthlyFoodExpenses
-    }
-    var monthlyTransportationExpensesAsOptionalDouble: Double? {
-        
-        guard let unwrappedMonthlyTransportationExpenses = Double(monthlyTransportationExpenses) else {
-            return nil
-        }
-        
-        // Return the unwrapped value
-        return unwrappedMonthlyTransportationExpenses
-    }
-    var  monthlyIncomeUnwrapped: Double {
-        
-        // Try to unwrap the optional Double
-        // Get the value as an actual Double, not optional (STEP 3)
-        guard let monthlyIncomeAsDouble = monthlyIncomeAsOptionalDouble else  {
-            
+    var monthlyIncomeAsDouble: Double {
+        guard let unwrapped = Double(monthlyIncome) else {
             return 0
         }
         
-        // We now know that we have a Double, so find its square root
-        let monthlyIncomeUnwrapped = monthlyIncomeAsDouble
-
-        // Now return the formatted String
-        // (STEP 4)
-        return monthlyIncomeUnwrapped
-        
+        return unwrapped
     }
-    var monthlyBillsUnwrapped: Double {
+    var monthlyBillsAsDouble: Double {
         
-        // Try to unwrap the optional Double
-        // Get the value as an actual Double, not optional (STEP 3)
-        guard let monthlyBillsAsDouble = monthlyBillsAsOptionalDouble else  {
-            
+        guard let unwrapped = Double(monthlyBills) else {
             return 0
         }
         
-        // We now know that we have a Double, so find its square root
-        let monthlyBillsUnwrapped = monthlyBillsAsDouble
-
-        // Now return the formatted String
-        // (STEP 4)
-        return monthlyBillsUnwrapped
-        
+        return unwrapped
     }
-    var monthlyInvestmentsUnwrapped: Double {
+
+    var monthlyInvestmentsAsDouble: Double {
         
-        // Try to unwrap the optional Double
-        // Get the value as an actual Double, not optional (STEP 3)
-        guard let monthlyInvestmentsAsDouble = monthlyInvestmentsAsOptionalDouble else  {
-            
+        guard let unwrapped = Double(monthlyBills) else {
             return 0
         }
         
-
-        let monthlyInvestmentsUnwrapped = monthlyInvestmentsAsDouble
-
-        // Now return the formatted String
-        // (STEP 4)
-        return monthlyInvestmentsUnwrapped
-        
+        return unwrapped
     }
-    var monthlyFoodExpensesUnwrapped: Double {
+    var monthlyFoodExpensesAsDouble: Double {
         
-        // Try to unwrap the optional Double
-        // Get the value as an actual Double, not optional (STEP 3)
-        guard let monthlyFoodExpensesAsDouble = monthlyFoodExpensesAsOptionalDouble else  {
-            
+        guard let unwrapped = Double(monthlyFoodExpenses) else {
             return 0
         }
         
-        // We now know that we have a Double, so find its square root
-        let monthlyFoodExpensesUnwrapped = monthlyFoodExpensesAsDouble
-
-        // Now return the formatted String
-        // (STEP 4)
-        return monthlyFoodExpensesUnwrapped
-        
+        return unwrapped
     }
-    var monthlyTransportationExpensesUnwrapped: Double {
+    var monthlyTransportationExpensesAsDouble: Double {
         
-        // Try to unwrap the optional Double
-        // Get the value as an actual Double, not optional (STEP 3)
-        guard let monthlyTransportationExpensesAsDouble = monthlyTransportationExpensesAsOptionalDouble else  {
-            
+        guard let unwrapped = Double(monthlyTransportationExpenses) else {
             return 0
         }
         
-        // We now know that we have a Double, so find its square root
-        let monthlyTransportationExpensesUnwrapped = monthlyTransportationExpensesAsDouble
-
-        // Now return the formatted String
-        // (STEP 4)
-        return monthlyTransportationExpensesUnwrapped
-        
+        return unwrapped
     }
-    @Binding var billPercentage: String
     
+    var findBudgetPercentage: Double {
+        let expenses = Double(monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble)
+        return ((expenses-monthlyIncomeAsDouble)/monthlyIncomeAsDouble) * 100
+    }
+    var findBudget: Double {
+        let expenses = Double(monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble)
+        return (expenses-monthlyIncomeAsDouble)
+    }
+    var findBillsPercentage: Double {
+        let expense: Double = monthlyBillsAsDouble
+        return (expense/monthlyIncomeAsDouble) * 100
+    }
+    var findInvestmentsPercentage: Double {
+        let expense: Double = monthlyInvestmentsAsDouble
+        return (expense/monthlyIncomeAsDouble) * 100
+    }
+    var findFoodExpensesPercentage: Double {
+        let expense: Double = monthlyFoodExpensesAsDouble
+        return (expense/monthlyIncomeAsDouble) * 100
+    }
+    var findTransportationExpensesPercentage: Double {
+        let expense: Double = monthlyTransportationExpensesAsDouble
+        return (expense/monthlyIncomeAsDouble) * 100
+    }
    
         
     var body: some View {
@@ -174,25 +106,7 @@ struct CashflowIncomeView: View {
                 VStack(spacing: 10){
                     Spacer()
                     Group{
-                            VStack {
-                                HStack{
-                                    Text("Cashflow")
-                                        .font(Font.custom("HelveticaNeue", size: 50))
-                                        .bold()
-                                        .multilineTextAlignment(.leading)
-                                    Spacer()
-                                }
-                                
-                                HStack{
-                                    Text("/Income")
-                                        .font(Font.custom("HelveticaNeue", size: 50))
-                                        .bold()
-                                        .multilineTextAlignment(.leading)
-                                    Spacer()
-                                }
-                            
-                        }
-                       
+                            TitleHelperView()
                         InputValueTitleView(titleOfInput: "Monthly Income/CashFlow", inputValue: $monthlyIncome)
 
                         InputValueTitleView(titleOfInput: "Monthly Bill Expenses", inputValue: $monthlyBills)
@@ -202,15 +116,10 @@ struct CashflowIncomeView: View {
                         InputValueTitleView(titleOfInput: "Monthly Food Expenses", inputValue: $monthlyFoodExpenses)
 
                         InputValueTitleView(titleOfInput: "Monthly Transportation Expenses", inputValue: $monthlyTransportationExpenses)
+                        
                         Button(action: {
-                            let income = String(monthlyIncomeUnwrapped)
-                            let bills = String(((monthlyBillsUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
-                            let investments = String(((monthlyInvestmentsUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
-                            let foodExpenses = String(((monthlyFoodExpensesUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
-                            let transportationExpense = String(((monthlyTransportationExpensesUnwrapped/monthlyIncomeUnwrapped)*100).formatted(.number.precision(.fractionLength(2))))
-                           
-                            let priorResult = result(Income: income, Bills: bills, Investments: investments, FoodExpenses: foodExpenses, TransportationExpense: transportationExpense)
-                            computedResult.append(priorResult)
+                            let priorResult = result(Income: monthlyIncomeAsDouble, Bills: findBillsPercentage, Investments: findInvestmentsPercentage, FoodExpenses: findFoodExpensesPercentage, TransportationExpense: findTransportationExpensesPercentage, Budget: findBudget, BudgetPercentage: findBudgetPercentage)
+                            history.append(priorResult)
                                                }, label: {
                                 Text("Save")
                                     .font(.headline.smallCaps())
@@ -220,13 +129,13 @@ struct CashflowIncomeView: View {
                         
                     }
                     .padding(.horizontal, 60)
-                    
+                    >
                     Spacer(minLength: 100)
                     Group{
                         VStack{
                             Text("Total Disposable income:")
                                 .font(.title2)
-                            Text("$4500")
+                        Text("\(findBudget)")
                                 .font(Font.custom("HelveticaNeue", size: 60))
                                 .bold()
                         }
@@ -240,13 +149,19 @@ struct CashflowIncomeView: View {
             }
             
         }
-    }
+    
+    
+    
+
+    
+}
+
 
 struct CashflowIncomeView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
             Group{
-                CashflowIncomeView(billPercentage: Binding.constant(" "))
+                CashflowIncomeView()
                     .tabItem {
                         Image(systemName: "dollarsign.arrow.circlepath")
                         Text("Cashflow/Income")
@@ -255,7 +170,7 @@ struct CashflowIncomeView_Previews: PreviewProvider {
                 
                 
                 
-                BudgetView()
+                BudgetView(history: Binding.constant(historyForPreviews))
                     .tabItem {
                         Image(systemName: "dollarsign.square")
                         Text("Budjet")

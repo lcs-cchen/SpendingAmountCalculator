@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BudgetView: View {
     
-    let priorResult: result
+    @Binding var history: [result]
     var body: some View {
         ZStack{
             Color("Light Grey")
@@ -32,41 +32,8 @@ struct BudgetView: View {
             ZStack{
                 VStack(alignment: .leading, spacing: 10){
                     Spacer(minLength: 50)
-                    Group{
-                        HStack{
-                            Text("Budget")
-                                .font(Font.custom("HelveticaNeue", size: 50))
-                                .bold()
-                                .multilineTextAlignment(.leading)
-                            Spacer()
-                        }
-                        Text("Income:")
-                            .underline()
-                            .bold()
-                        Text("$200")
-                        Text("Percentages:")
-                            .underline()
-                            .bold()
-                        Group{
-                            OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Bills)
-                            OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Bills)
-                            OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Bills)
-                            OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Bills)
-                            
-                            
-                        }
-                        .font(Font.custom("HelveticaNeue", size: 18))
-                        .padding(.vertical, 10)
-                        
-                        Spacer()
-                        HStack{
-                            VStack{
-                                Text("total Disposible income")
-                                Text("700")
-                            }
-                            Text("10% left")
-                        }
-                        Spacer()
+                    List(history.reversed()) { somePriorResult in
+                        CalculatedView(priorResult: somePriorResult)
                     }
                     .padding(.horizontal, 60)
                     
@@ -80,7 +47,7 @@ struct BudgetView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
             Group{
-                CashflowIncomeView(billPercentage: Binding.constant(" "))
+                CashflowIncomeView()
                     .tabItem {
                         Image(systemName: "dollarsign.arrow.circlepath")
                         Text("Cashflow/Income")
@@ -89,7 +56,7 @@ struct BudgetView_Previews: PreviewProvider {
                 
                 
                 
-                BudgetView(priorResult: exampleResultForPreviews)
+                BudgetView(history: Binding.constant(historyForPreviews))
                     .tabItem {
                         Image(systemName: "dollarsign.square")
                         Text("Budjet")

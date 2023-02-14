@@ -17,7 +17,7 @@ struct OutputValueTitleView: View {
                 .font(Font.custom("HelveticaNeue", size: 18))
             Spacer()
             
-           Text("\(outputValue)")
+           Text("\(outputValue)%")
                 .multilineTextAlignment(.trailing)
                 .font(Font.custom("HelveticaNeue", size: 18))
         }

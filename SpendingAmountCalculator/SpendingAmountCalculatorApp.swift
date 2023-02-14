@@ -9,17 +9,17 @@ import SwiftUI
 
 @main
 struct SpendingAmountCalculatorApp: App {
-    @State var billPercentageAmount = " "
+    @State var history: [result] = []
     var body: some Scene {
         WindowGroup {
             TabView {
-                CashflowIncomeView(billPercentage: $billPercentageAmount)
+                CashflowIncomeView()
                     .tabItem {
                         Image(systemName: "car")
                         Text("Hi")
                     }
 
-                CashflowIncomeView(billPercentage: $billPercentageAmount)
+                CashflowIncomeView()
                     .tabItem {
                         Image(systemName: "circle")
                         Text("Bye")
