@@ -58,27 +58,27 @@ struct CashflowIncomeView: View {
     }
     
     var findBudgetPercentage: Double {
-        let expenses = Double(monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble)
+        let expenses = monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble
         return ((monthlyIncomeAsDouble-expenses)/monthlyIncomeAsDouble) * 100
     }
     var findBudget: Double {
-        let expenses = Double(monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble)
+        let expenses = monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble
         return ((monthlyIncomeAsDouble-expenses))
     }
     var findBillsPercentage: Double {
-        let expense: Double = monthlyBillsAsDouble
+        let expense = monthlyBillsAsDouble
         return (expense/monthlyIncomeAsDouble) * 100
     }
     var findInvestmentsPercentage: Double {
-        let expense: Double = monthlyInvestmentsAsDouble
+        let expense = monthlyInvestmentsAsDouble
         return (expense/monthlyIncomeAsDouble) * 100
     }
     var findFoodExpensesPercentage: Double {
-        let expense: Double = monthlyFoodExpensesAsDouble
+        let expense = monthlyFoodExpensesAsDouble
         return (expense/monthlyIncomeAsDouble) * 100
     }
     var findTransportationExpensesPercentage: Double {
-        let expense: Double = monthlyTransportationExpensesAsDouble
+        let expense = monthlyTransportationExpensesAsDouble
         return (expense/monthlyIncomeAsDouble) * 100
     }
     
@@ -103,7 +103,7 @@ struct CashflowIncomeView: View {
                 }
             }
             ZStack{
-                VStack(spacing: 10){
+                VStack(spacing: 8){
                     Spacer()
                     Group{
                         TitleHelperView()
@@ -118,7 +118,7 @@ struct CashflowIncomeView: View {
                         InputValueTitleView(titleOfInput: "Monthly Transportation Expenses", inputValue: $monthlyTransportationExpenses)
                         
                         Button(action: {
-                            let priorResult = result(Income: String(monthlyIncomeAsDouble), Bills: String(findBillsPercentage), Investments: String(findInvestmentsPercentage), FoodExpenses: String(findFoodExpensesPercentage), TransportationExpense: String(findTransportationExpensesPercentage), Budget: String(findBudget), BudgetPercentage: String(findBudgetPercentage))
+                            let priorResult = result(Income: String(monthlyIncomeAsDouble.formatted(.number.precision(.significantDigits(2)))), Bills: String(findBillsPercentage.formatted(.number.precision(.significantDigits(2)))), Investments: String(findInvestmentsPercentage.formatted(.number.precision(.significantDigits(2)))), FoodExpenses: String(findFoodExpensesPercentage.formatted(.number.precision(.significantDigits(2)))), TransportationExpense: String(findTransportationExpensesPercentage.formatted(.number.precision(.significantDigits(2)))), Budget: String(findBudget), BudgetPercentage: String(findBudgetPercentage))
                             history.append(priorResult)
                         }, label: {
                             Text("Save")
@@ -130,17 +130,17 @@ struct CashflowIncomeView: View {
                     }
                     .padding(.horizontal, 60)
                     
-                    Spacer(minLength: 100)
+                    Spacer(minLength: 60)
                     Group{
                         VStack{
                             Text("Total Disposable income:")
                                 .font(.title2)
-                            Text("\(findBudget.formatted(.number.precision(.fractionLength(2))))")
+                            Text("$\(findBudget.formatted(.number.precision(.fractionLength(2))))")
                                 .font(Font.custom("HelveticaNeue", size: 60))
                                 .bold()
                         }
                     }
-                    Spacer()
+                    Spacer(minLength: 40)
                     
                 }
                 

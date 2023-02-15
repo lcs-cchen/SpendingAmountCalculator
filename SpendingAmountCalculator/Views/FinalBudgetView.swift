@@ -13,11 +13,27 @@ struct FinalBudgetView: View {
     var body: some View {
         HStack{
             VStack{
-                Text("total Disposible income")
-                Text("\(priorResult.Budget)")
+                Text("Total Disposible Income:")
+                    .multilineTextAlignment(.center)
+                Text("$\(priorResult.Budget)")
+                    .font(Font.custom("HelveticaNeue", size: 50))
+                    .bold()
+                    .frame(width: 200,height: 50)
+                    .scaledToFit()
             }
-            Text("\(priorResult.BudgetPercentage)% left")
+           
+            VStack{
+                Text("Percentage left:")
+                    .multilineTextAlignment(.center)
+                Text("\(priorResult.BudgetPercentage)%")
+                    .font(Font.custom("HelveticaNeue", size: 50))
+                    .multilineTextAlignment(.center)
+                    .bold()
+                    
+                
+            }
         }
+        .font(Font.custom("HelveticaNeue", size: 15))
     }
 }
 

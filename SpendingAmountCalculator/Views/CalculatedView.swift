@@ -14,27 +14,49 @@ struct CalculatedView: View {
         Group{
             VStack(spacing: 20){
                 
-                Text("Income:")
-                    .underline()
-                    .bold()
-                Text(priorResult.Income)
-                Text("Percentages:")
-                    .underline()
-                    .bold()
                 
-                OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Bills)
-                OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.FoodExpenses)
-                OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Investments)
-                OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.TransportationExpense)
+                    VStack(spacing: 10){
+                        HStack{
+                            Text("Income:")
+                                .multilineTextAlignment(.leading)
+                                .underline()
+                                .bold()
+                         Spacer()
+                        }
+                        
+                        HStack{
+                            Text(priorResult.Income)
+                                .font(Font.custom("HelveticaNeue", size: 50))
+                                .bold()
+                            Spacer()
+                        }
+                        .padding(.bottom, -10)
+                    
+                    
+                }
+                HStack {
+                    Text("Percentages:")
+                        .underline()
+                        .bold()
+                    .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                
+                OutputValueTitleView(titleOfOutput: "Bills Percentage", outputValue: priorResult.Bills)
+                OutputValueTitleView(titleOfOutput: "Food Expense Percentage", outputValue: priorResult.FoodExpenses)
+                OutputValueTitleView(titleOfOutput: "Investments Percentage", outputValue: priorResult.Investments)
+                OutputValueTitleView(titleOfOutput: "Transportation Percentage", outputValue: "\(priorResult.TransportationExpense)")
                 
                 
                 
-                    .font(Font.custom("HelveticaNeue", size: 18))
-                    .padding(.vertical, 10)
+                    
+                    
                 
                 Spacer()
                 
             }
+            .font(Font.custom("HelveticaNeue", size: 25))
+        
         }
     }
 }

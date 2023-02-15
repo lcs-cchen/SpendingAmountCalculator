@@ -14,7 +14,7 @@ struct BudgetView: View {
     var body: some View {
         ZStack{
             Color("Light Grey")
-                .ignoresSafeArea()
+                .ignoresSafeArea(edges: .top)
             Group{
                 VStack {
                     Spacer()
@@ -34,23 +34,28 @@ struct BudgetView: View {
                 VStack{
                     
         
-                       
-                        Text("History")
-                            .font(.headline.smallCaps())
-                            .padding()
-                    
+                    HStack{
+                        Text("Budget")
+                            .font(Font.custom("HelveticaNeue", size: 50))
+                            .bold()
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 50)
+                            .padding(.leading, 60)
+                        Spacer()
+                    }
                     
                     List(history.reversed()) { somePriorResult in
                         CalculatedView(priorResult: somePriorResult)
                     }
+                    .padding(.top, -30)
                     .listStyle(.inset)
                     .frame(width: 300, height: 300)
-                    Spacer(minLength: 200)
+                    Spacer(minLength: 100)
                     List(history.reversed()) { somePriorResult in
                         FinalBudgetView(priorResult: somePriorResult)
                     }
                     .listStyle(.inset)
-                    .frame(width: 300, height: 50)
+                    .frame(width: 300, height: 130)
                     Spacer()
                     
                 }
