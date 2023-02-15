@@ -10,6 +10,7 @@ import SwiftUI
 struct BudgetView: View {
     
     @Binding var history: [result]
+    
     var body: some View {
         ZStack{
             Color("Light Grey")
@@ -30,14 +31,31 @@ struct BudgetView: View {
                 }
             }
             ZStack{
-                VStack(alignment: .leading, spacing: 10){
-                    Spacer(minLength: 50)
+                VStack{
+                    
+        
+                       
+                        Text("History")
+                            .font(.headline.smallCaps())
+                            .padding()
+                    
+                    
                     List(history.reversed()) { somePriorResult in
                         CalculatedView(priorResult: somePriorResult)
                     }
-                    .padding(.horizontal, 60)
+                    .listStyle(.inset)
+                    .frame(width: 300, height: 300)
+                    Spacer(minLength: 200)
+                    List(history.reversed()) { somePriorResult in
+                        FinalBudgetView(priorResult: somePriorResult)
+                    }
+                    .listStyle(.inset)
+                    .frame(width: 300, height: 50)
+                    Spacer()
                     
                 }
+                
+                
             }
         }
     }
@@ -47,7 +65,7 @@ struct BudgetView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
             Group{
-                CashflowIncomeView()
+                CashflowIncomeView(history: Binding.constant(historyForPreviews))
                     .tabItem {
                         Image(systemName: "dollarsign.arrow.circlepath")
                         Text("Cashflow/Income")

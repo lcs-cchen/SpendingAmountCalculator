@@ -12,40 +12,29 @@ struct CalculatedView: View {
    
     var body: some View {
         Group{
-            HStack{
-                Text("Budget")
-                    .font(Font.custom("HelveticaNeue", size: 50))
+            VStack(spacing: 20){
+                
+                Text("Income:")
+                    .underline()
                     .bold()
-                    .multilineTextAlignment(.leading)
-                Spacer()
-            }
-            Text("Income:")
-                .underline()
-                .bold()
-            Text(priorResult.Income)
-            Text("Percentages:")
-                .underline()
-                .bold()
-            Group{
+                Text(priorResult.Income)
+                Text("Percentages:")
+                    .underline()
+                    .bold()
+                
                 OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Bills)
                 OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.FoodExpenses)
                 OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.Investments)
                 OutputValueTitleView(titleOfOutput: "Expenses", outputValue: priorResult.TransportationExpense)
                 
                 
+                
+                    .font(Font.custom("HelveticaNeue", size: 18))
+                    .padding(.vertical, 10)
+                
+                Spacer()
+                
             }
-            .font(Font.custom("HelveticaNeue", size: 18))
-            .padding(.vertical, 10)
-            
-            Spacer()
-            HStack{
-                VStack{
-                    Text("total Disposible income")
-                    Text("\(priorResult.Budget)")
-                }
-                Text("\(priorResult.BudgetPercentage)% left")
-            }
-            Spacer()
         }
     }
 }

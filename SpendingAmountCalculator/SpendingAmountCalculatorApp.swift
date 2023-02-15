@@ -13,18 +13,24 @@ struct SpendingAmountCalculatorApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                CashflowIncomeView()
-                    .tabItem {
-                        Image(systemName: "car")
-                        Text("Hi")
-                    }
-
-                CashflowIncomeView()
-                    .tabItem {
-                        Image(systemName: "circle")
-                        Text("Bye")
-                    }
-
+                Group{
+                    CashflowIncomeView(history: $history)
+                        .tabItem {
+                            Image(systemName: "dollarsign.arrow.circlepath")
+                            Text("Cashflow/Income")
+                            
+                        }
+                    
+                    
+                    
+                    BudgetView(history: $history)
+                        .tabItem {
+                            Image(systemName: "dollarsign.square")
+                            Text("Budjet")
+                        }
+                    
+                }
+                
             }
         }
     }

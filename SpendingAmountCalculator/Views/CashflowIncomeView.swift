@@ -9,13 +9,13 @@ import SwiftUI
 
 struct CashflowIncomeView: View {
     
-    @State var history: [result] = []
+    @Binding var history: [result]
     @State var monthlyIncome = ""
     @State var monthlyBills = ""
     @State var monthlyInvestments = ""
     @State var monthlyFoodExpenses = ""
     @State var monthlyTransportationExpenses = ""
-
+    
     var monthlyIncomeAsDouble: Double {
         guard let unwrapped = Double(monthlyIncome) else {
             return 0
@@ -31,10 +31,10 @@ struct CashflowIncomeView: View {
         
         return unwrapped
     }
-
+    
     var monthlyInvestmentsAsDouble: Double {
         
-        guard let unwrapped = Double(monthlyBills) else {
+        guard let unwrapped = Double(monthlyInvestments) else {
             return 0
         }
         
@@ -59,11 +59,11 @@ struct CashflowIncomeView: View {
     
     var findBudgetPercentage: Double {
         let expenses = Double(monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble)
-        return ((expenses-monthlyIncomeAsDouble)/monthlyIncomeAsDouble) * 100
+        return ((monthlyIncomeAsDouble-expenses)/monthlyIncomeAsDouble) * 100
     }
     var findBudget: Double {
         let expenses = Double(monthlyFoodExpensesAsDouble + monthlyInvestmentsAsDouble + monthlyTransportationExpensesAsDouble + monthlyBillsAsDouble)
-        return (expenses-monthlyIncomeAsDouble)
+        return ((monthlyIncomeAsDouble-expenses))
     }
     var findBillsPercentage: Double {
         let expense: Double = monthlyBillsAsDouble
@@ -81,8 +81,8 @@ struct CashflowIncomeView: View {
         let expense: Double = monthlyTransportationExpensesAsDouble
         return (expense/monthlyIncomeAsDouble) * 100
     }
-   
-        
+    
+    
     var body: some View {
         ZStack{
             Color("Light Grey")
@@ -106,53 +106,53 @@ struct CashflowIncomeView: View {
                 VStack(spacing: 10){
                     Spacer()
                     Group{
-                            TitleHelperView()
+                        TitleHelperView()
                         InputValueTitleView(titleOfInput: "Monthly Income/CashFlow", inputValue: $monthlyIncome)
-
+                        
                         InputValueTitleView(titleOfInput: "Monthly Bill Expenses", inputValue: $monthlyBills)
-
+                        
                         InputValueTitleView(titleOfInput: "Monthly Investments", inputValue: $monthlyInvestments)
-
+                        
                         InputValueTitleView(titleOfInput: "Monthly Food Expenses", inputValue: $monthlyFoodExpenses)
-
+                        
                         InputValueTitleView(titleOfInput: "Monthly Transportation Expenses", inputValue: $monthlyTransportationExpenses)
                         
                         Button(action: {
-                            let priorResult = result(Income: monthlyIncomeAsDouble, Bills: findBillsPercentage, Investments: findInvestmentsPercentage, FoodExpenses: findFoodExpensesPercentage, TransportationExpense: findTransportationExpensesPercentage, Budget: findBudget, BudgetPercentage: findBudgetPercentage)
+                            let priorResult = result(Income: String(monthlyIncomeAsDouble), Bills: String(findBillsPercentage), Investments: String(findInvestmentsPercentage), FoodExpenses: String(findFoodExpensesPercentage), TransportationExpense: String(findTransportationExpensesPercentage), Budget: String(findBudget), BudgetPercentage: String(findBudgetPercentage))
                             history.append(priorResult)
-                                               }, label: {
-                                Text("Save")
-                                    .font(.headline.smallCaps())
-                            })
-                                .buttonStyle(.bordered)
+                        }, label: {
+                            Text("Save")
+                                .font(.headline.smallCaps())
+                        })
+                        .buttonStyle(.bordered)
                         
                         
                     }
                     .padding(.horizontal, 60)
-                    >
+                    
                     Spacer(minLength: 100)
                     Group{
                         VStack{
                             Text("Total Disposable income:")
                                 .font(.title2)
-                        Text("\(findBudget)")
+                            Text("\(findBudget.formatted(.number.precision(.fractionLength(2))))")
                                 .font(Font.custom("HelveticaNeue", size: 60))
                                 .bold()
                         }
                     }
                     Spacer()
-                   
-                    }
                     
                 }
                 
             }
             
         }
+        
+    }
     
     
     
-
+    
     
 }
 
@@ -161,7 +161,7 @@ struct CashflowIncomeView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
             Group{
-                CashflowIncomeView()
+                CashflowIncomeView(history: Binding.constant(historyForPreviews))
                     .tabItem {
                         Image(systemName: "dollarsign.arrow.circlepath")
                         Text("Cashflow/Income")
