@@ -12,10 +12,10 @@ struct CalculatedView: View {
    
     var body: some View {
         Group{
-            VStack(spacing: 20){
+            VStack(spacing: 10){
                 
                 
-                    VStack(spacing: 10){
+                    VStack(spacing: 5){
                         HStack{
                             Text("Income:")
                                 .multilineTextAlignment(.leading)
@@ -30,7 +30,7 @@ struct CalculatedView: View {
                                 .bold()
                             Spacer()
                         }
-                        .padding(.bottom, -10)
+                        .padding(.bottom, -5)
                     
                     
                 }

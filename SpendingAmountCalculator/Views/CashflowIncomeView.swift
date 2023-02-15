@@ -118,7 +118,7 @@ struct CashflowIncomeView: View {
                         InputValueTitleView(titleOfInput: "Monthly Transportation Expenses", inputValue: $monthlyTransportationExpenses)
                         
                         Button(action: {
-                            let priorResult = result(Income: String(monthlyIncomeAsDouble.formatted(.number.precision(.significantDigits(2)))), Bills: String(findBillsPercentage.formatted(.number.precision(.significantDigits(2)))), Investments: String(findInvestmentsPercentage.formatted(.number.precision(.significantDigits(2)))), FoodExpenses: String(findFoodExpensesPercentage.formatted(.number.precision(.significantDigits(2)))), TransportationExpense: String(findTransportationExpensesPercentage.formatted(.number.precision(.significantDigits(2)))), Budget: String(findBudget), BudgetPercentage: String(findBudgetPercentage))
+                            let priorResult = result(Income: String(monthlyIncomeAsDouble.formatted(.number.precision(.significantDigits(2)))), Bills: String(findBillsPercentage.formatted(.number.precision(.significantDigits(2)))), Investments: String(findInvestmentsPercentage.formatted(.number.precision(.significantDigits(2)))), FoodExpenses: String(findFoodExpensesPercentage.formatted(.number.precision(.significantDigits(2)))), TransportationExpense: String(findTransportationExpensesPercentage.formatted(.number.precision(.significantDigits(2)))), Budget: String(findBudget), BudgetPercentage: String(findBudgetPercentage.formatted(.number.precision(.significantDigits(2)))))
                             history.append(priorResult)
                         }, label: {
                             Text("Save")
